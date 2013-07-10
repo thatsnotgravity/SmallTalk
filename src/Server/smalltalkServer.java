@@ -1,4 +1,4 @@
-package server;
+package Server;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.Socket;
 
-public class SmalltalkServer extends Thread {
+public class SmallTalkServer extends Thread {
 
 	DatagramPacket pkt;
 	private Socket socket = null;
@@ -20,7 +20,7 @@ public class SmalltalkServer extends Thread {
 	 * Constructor for smalltalkServer
 	 * Creates server
 	 */
-	public SmalltalkServer(SmallChatServer server, Socket socket) {
+	public SmallTalkServer(SmallChatServer server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
 		ID = socket.getPort();
@@ -32,48 +32,48 @@ public class SmalltalkServer extends Thread {
 	 */
 	public void run() {
 		System.out.println("Server thread " + ID + " running...");
-		while(true){
-			try{
+		while (true) {
+			try {
 				System.out.println(streamIn.readUTF());
-			}catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	/*
 	 * Sends a message
 	 * Temporary method...must integrate with the Common package
 	 */
-	public void send(String msg){
-		try{
+	public void send(String msg) {
+		try {
 			streamOut.writeUTF(msg);
 			streamOut.flush();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Method for opening a new stream in
 	 */
-	public void open(){
-		try{
+	public void open() {
+		try {
 			streamIn = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-		}catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Method for closing the socket, streamIn, and streamOut
 	 */
-	public void close() throws IOException{
-		if(socket != null)
+	public void close() throws IOException {
+		if (socket != null)
 			socket.close();
-		if(streamIn != null)
+		if (streamIn != null)
 			streamIn.close();
-		if(streamOut != null)
+		if (streamOut != null)
 			streamOut.close();
 	}
 }

@@ -15,7 +15,7 @@
  * For existing account information see accounts file.
  */
 
-package server;
+package Server;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,7 +25,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-public class Account{
+public class Account {
 
 	private String email;
 	private String username;
@@ -51,7 +51,7 @@ public class Account{
 	 */
 
 	public void createUserAccount(String username, String password, String email) {
-		
+
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -71,16 +71,16 @@ public class Account{
 	public void fetchAccountInfo(String email) {
 
 		this.email = email;
-		File accounts = new java.io.File("accounts.txt");  
+		File accounts = new java.io.File("accounts.txt");
 
 		try {
 			Scanner accountFinder = new Scanner(accounts);
-			while(accountFinder.hasNextLine()) {
+			while (accountFinder.hasNextLine()) {
 				if (accountFinder.nextLine().equals("email: " + email)) {
 					String userPassword = accountFinder.nextLine().toString();
-					this.username = userPassword.replace("username: ", ""); 
+					this.username = userPassword.replace("username: ", "");
 					String userIdentity = accountFinder.nextLine().toString();
-					this.password = userIdentity.replace("password: ", ""); 
+					this.password = userIdentity.replace("password: ", "");
 				}
 			}
 			accountFinder.close();
@@ -101,17 +101,17 @@ public class Account{
 	public boolean doesAccountExist(String email) {
 
 		fetchAccountInfo(email);
-		if(this.password != null) return true;
+		if (this.password != null) return true;
 		else return false;
 	}
 
 	public boolean isUsernameTaken(String username) {
 
-		File accounts = new java.io.File("accounts.txt");  
+		File accounts = new java.io.File("accounts.txt");
 
 		try {
 			Scanner accountFinder = new Scanner(accounts);
-			while(accountFinder.hasNextLine()) {
+			while (accountFinder.hasNextLine()) {
 				if (accountFinder.nextLine().equals("username: " + username)) {
 					accountFinder.close();
 					return true;
@@ -135,7 +135,7 @@ public class Account{
 
 	private void saveAccount() {
 
-		try{ 
+		try {
 			FileWriter accountWriter = new FileWriter("accounts.txt", true);
 			BufferedWriter out = new BufferedWriter(accountWriter);
 			out.newLine();
@@ -147,7 +147,7 @@ public class Account{
 			out.newLine();
 			out.flush();
 			out.close();
-		}catch (Exception e){
+		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
@@ -169,8 +169,8 @@ public class Account{
 	 * Returns - password as a String
 	 * 
 	 */
-	
-	public String getPassword(){
+
+	public String getPassword() {
 		return this.password;
 	}
 	
@@ -181,8 +181,8 @@ public class Account{
 	 * Returns - The encrypted string in hex format
 	 * 
 	 */
-	
-	public String hashPassword(String pass) throws NoSuchAlgorithmException{
+
+	public String hashPassword(String pass) throws NoSuchAlgorithmException {
 		MessageDigest mess = MessageDigest.getInstance("MD5");
 		mess.update(pass.getBytes());
 		byte digest[] = mess.digest();
@@ -196,16 +196,16 @@ public class Account{
 	 * Returns - String in hex format
 	 * 
 	 */
-	
+
 	private String toHexString(byte[] bytes) {
-	    final char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-	    char[] hexChars = new char[bytes.length * 2];
-	    int v;
-	    for ( int j = 0; j < bytes.length; j++ ) {
-	        v = bytes[j] & 0xFF;
-	        hexChars[j * 2] = hexArray[v >>> 4];
-	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-	    }
-	    return new String(hexChars);
+		final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+		char[] hexChars = new char[bytes.length * 2];
+		int v;
+		for (int j = 0; j < bytes.length; j++) {
+			v = bytes[j] & 0xFF;
+			hexChars[j * 2] = hexArray[v >>> 4];
+			hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+		}
+		return new String(hexChars);
 	}
 }

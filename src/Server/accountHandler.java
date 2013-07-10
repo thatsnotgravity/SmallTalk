@@ -1,9 +1,9 @@
-package server;
+package Server;
 
 import java.security.NoSuchAlgorithmException;
 
-public class AccountHandler{
- 
+public class AccountHandler {
+
 	public Account loginAccount;
 
 	public AccountHandler() {
@@ -12,35 +12,35 @@ public class AccountHandler{
 
 	public boolean loginAccountHandler(String username, String password) throws NoSuchAlgorithmException {
 
-		if(loginAccount.doesAccountExist(username)) {
-			if(attemptLogin(password)) 
+		if (loginAccount.doesAccountExist(username)) {
+			if (attemptLogin(password))
 				return true;
 		}
 		return false;
 	}
 
 	public boolean createAccountHandler(String username, String password, String email) {
-		
-		if(!loginAccount.doesAccountExist(username)) {
+
+		if (!loginAccount.doesAccountExist(username)) {
 			loginAccount.createUserAccount(username, password, email);
 			return true;
 		}
 		return false;
 	}
-	
+
 	public Account forgotAccountHandler(String email) {
-		
-		if(loginAccount.doesAccountExist(email)) {
+
+		if (loginAccount.doesAccountExist(email)) {
 			loginAccount.fetchAccountInfo(email);
 			return loginAccount;
 		}
 		return null;
-		
+
 	}
 
-	public boolean attemptLogin(String password) throws NoSuchAlgorithmException { 
+	public boolean attemptLogin(String password) throws NoSuchAlgorithmException {
 
-		if (loginAccount.getPassword().equals(loginAccount.hashPassword(password))) 
+		if (loginAccount.getPassword().equals(loginAccount.hashPassword(password)))
 			return true;
 		else
 			return false;
