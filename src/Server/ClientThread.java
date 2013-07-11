@@ -18,8 +18,8 @@ public class ClientThread extends Thread {
 	 * @param socket The Socket Object to bind too.
 	 */
 	public ClientThread(SmallTalkClient client, Socket socket) {
-		this.client = client;                                                            //TODO: YOU WERE IN THE MIDDLE OF MAKING EVERYTHING JAVADOC
-		this.socket = socket;                                                           // http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#tag
+		this.client = client;
+		this.socket = socket;
 		open();
 		start();
 	}
