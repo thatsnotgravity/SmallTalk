@@ -37,7 +37,7 @@ public class SmallTalkClient implements Runnable {
 
 	}
 
-	/*
+	/**
 	 * Constructor for starting server
 	 * Opens the socket at hostName and starts the server
 	 */
@@ -51,9 +51,11 @@ public class SmallTalkClient implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
-	/*
-	 * Method that starts the thread and makes a new client
+
+	/**
+	 * Method that starts the thread and makes a new client.
+	 *
+	 * @throws IOException
 	 */
 
 	public void start() throws IOException {
@@ -66,8 +68,10 @@ public class SmallTalkClient implements Runnable {
 		}
 	}
 
-	/*
-	 * Method that stops the thread and server 
+	/**
+	 * Method that stops the thread and server
+	 *
+	 * @throws IOException
 	 */
 	public void stop() throws IOException {
 		if (thread != null) {
@@ -88,8 +92,9 @@ public class SmallTalkClient implements Runnable {
 		client.stop();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
+	 *
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {

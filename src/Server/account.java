@@ -33,7 +33,7 @@ public class Account {
 
 	// public String lastLogin;
 
-	/*
+	/**
 	 * Creates an Account object.
 	 * Identifies its Username that was passed in by loginHandler or Client.
 	 * Fetches the rest of account info from accounts file afterwards.
@@ -43,11 +43,15 @@ public class Account {
 
 	}
 
-	/*
+	/**
 	 * Used to create a new SmallTalk account.
 	 * Parameters will be passed in from client.
 	 * Identifies username, password and user identity.
 	 * Afterwards, the account information is written to the accounts file.
+	 *
+	 * @param username The username of the account.
+	 * @param password The password of the account.
+	 * @param email    The email of the account.
 	 */
 
 	public void createUserAccount(String username, String password, String email) {
@@ -59,13 +63,15 @@ public class Account {
 		saveAccount();
 	}
 
-	/*
+	/**
 	 * Used to populate the password and identity field for Account objects.
 	 * If the username exists in the accounts file, then this method fetches
-	 * the password and identity. 
+	 * the password and identity.
 	 * If the username does not exist in the accounts file, the password
 	 * and the identity are left as null.
-	 * This allows for the creation of new accounts.	
+	 * This allows for the creation of new accounts.
+	 *
+	 * @param email The email to be used.
 	 */
 
 	public void fetchAccountInfo(String email) {
@@ -90,13 +96,6 @@ public class Account {
 		}
 	}
 
-	/*
-	 * Used to see if a username is taken.
-	 * As of now this is not used locally. Client will use this later on
-	 * in order to see if a username is free for use.
-	 * Checks if password field is null, if so then the user account is not
-	 * already in the accounts file.
-	 */
 
 	public boolean doesAccountExist(String email) {
 
@@ -104,6 +103,17 @@ public class Account {
 		if (this.password != null) return true;
 		else return false;
 	}
+
+	/**
+	 * Used to see if a username is taken.
+	 * As of now this is not used locally. Client will use this later on
+	 * in order to see if a username is free for use.
+	 * Checks if password field is null, if so then the user account is not
+	 * already in the accounts file.
+	 *
+	 * @param username The username to be used.
+	 * @return A boolean value of True if the username is taken.
+	 */
 
 	public boolean isUsernameTaken(String username) {
 
@@ -125,12 +135,12 @@ public class Account {
 		return false;
 	}
 
-	/*
+	/**
 	 * Currently writes the users new account out to a plain text accounts file.
 	 * Writes real name, username, and then password.
-	 * TODO Write to some sort of database. 
-	 * 		Encrypt stored user information.
-	 * 		Return an actual error. 
+	 * TODO Write to some sort of database.
+	 * Encrypt stored user information.
+	 * Return an actual error.
 	 */
 
 	private void saveAccount() {
@@ -152,9 +162,11 @@ public class Account {
 		}
 	}
 
-	/*
+	/**
 	 * Used to output account information to a string.
 	 * Will be used by the Client to display account information if requested.
+	 *
+	 * @return The account data as a string.
 	 */
 
 	public String toString() {
@@ -162,24 +174,23 @@ public class Account {
 		return "username: " + username + "\npassword: " + password
 				+ "\nemail: " + email;
 	}
-	
-	/*
+
+	/**
 	 * Used to send password information to other classes
-	 * Parameters - none
-	 * Returns - password as a String
-	 * 
+	 *
+	 * @return Password as a String
 	 */
 
 	public String getPassword() {
 		return this.password;
 	}
-	
-	/*
-	 * 
+
+	/**
 	 * Used to encrypt account information
-	 * Parameters - String that is to be encrypted
-	 * Returns - The encrypted string in hex format
-	 * 
+	 *
+	 * @param pass String that is to be encrypted
+	 * @return The encrypted string in hex format
+	 * @throws NoSuchAlgorithmException
 	 */
 
 	public String hashPassword(String pass) throws NoSuchAlgorithmException {
@@ -188,13 +199,12 @@ public class Account {
 		byte digest[] = mess.digest();
 		return toHexString(digest);
 	}
-	
-	/*
-	 * 
+
+	/**
 	 * Used to convert a byte array to hex
-	 * Parameters - byte array
-	 * Returns - String in hex format
-	 * 
+	 *
+	 * @param bytes The byte array
+	 * @return A String in hex format
 	 */
 
 	private String toHexString(byte[] bytes) {
