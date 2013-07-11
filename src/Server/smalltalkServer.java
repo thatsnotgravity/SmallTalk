@@ -16,9 +16,12 @@ public class SmallTalkServer extends Thread {
 	private DataInputStream streamIn = null;
 	private DataOutputStream streamOut = null;
 
-	/*
+	/**
 	 * Constructor for smalltalkServer
 	 * Creates server
+	 *
+	 * @param server The server object to supply to the constructor
+	 * @param socket The socket which to open the server
 	 */
 	public SmallTalkServer(SmallChatServer server, Socket socket) {
 		this.server = server;
@@ -26,8 +29,9 @@ public class SmallTalkServer extends Thread {
 		ID = socket.getPort();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Begins the server.
+	 *
 	 * @see java.lang.Thread#run()
 	 */
 	public void run() {
@@ -41,9 +45,11 @@ public class SmallTalkServer extends Thread {
 		}
 	}
 
-	/*
+	/**
 	 * Sends a message
 	 * Temporary method...must integrate with the Common package
+	 *
+	 * @param msg The message to be sent
 	 */
 	public void send(String msg) {
 		try {
@@ -54,7 +60,7 @@ public class SmallTalkServer extends Thread {
 		}
 	}
 
-	/*
+	/**
 	 * Method for opening a new stream in
 	 */
 	public void open() {
@@ -65,7 +71,7 @@ public class SmallTalkServer extends Thread {
 		}
 	}
 
-	/*
+	/**
 	 * Method for closing the socket, streamIn, and streamOut
 	 */
 	public void close() throws IOException {

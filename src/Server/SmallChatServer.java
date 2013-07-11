@@ -9,10 +9,12 @@ public class SmallChatServer implements Runnable {
 	private Thread thread = null;
 	private SmallTalkServer client = null; //TODO: THIS SEEMS WONKY
 
-	/*
-	 * Constructor for SmallChatServer
-	 * Parameters - port as an integer
+	/**
+	 * Constructor for SmallChatServer.
+	 * <p/>
 	 * Binds to port and begins the server
+	 *
+	 * @param port Port number to bind to as an integer
 	 */
 	public SmallChatServer(int port) {
 		try {
@@ -25,7 +27,7 @@ public class SmallChatServer implements Runnable {
 		}
 	}
 
-	/*
+	/**
 	 * Method that starts the thread
 	 */
 	private void start() {
@@ -35,7 +37,7 @@ public class SmallChatServer implements Runnable {
 		}
 	}
 
-	/*
+	/**
 	 * Method that stops the thread
 	 */
 	public void stop() {
@@ -45,8 +47,9 @@ public class SmallChatServer implements Runnable {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Runs the Chat server
+	 *
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
@@ -61,10 +64,10 @@ public class SmallChatServer implements Runnable {
 
 	}
 
-	/*
-	 * Adds a new client when needed
-	 * Parameters - Socket
-	 * Accepts client and starts their thread
+	/**
+	 * Adds a new client when needed. Accepts client and starts their thread
+	 *
+	 * @param socket The socket object to bind too.
 	 */
 	public void addThread(Socket socket) {
 		System.out.println("Accepting client...");

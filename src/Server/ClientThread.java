@@ -11,17 +11,20 @@ public class ClientThread extends Thread {
 	private SmallTalkClient client = null;
 	private DataInputStream streamIn = null;
 
-	/*
+	/**
 	 * Constructor for ClientThread
+	 *
+	 * @param client The SmallTalkClient object to supply.
+	 * @param socket The Socket Object to bind too.
 	 */
 	public ClientThread(SmallTalkClient client, Socket socket) {
-		this.client = client;
-		this.socket = socket;
+		this.client = client;                                                            //TODO: YOU WERE IN THE MIDDLE OF MAKING EVERYTHING JAVADOC
+		this.socket = socket;                                                           // http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#tag
 		open();
 		start();
 	}
 
-	/*
+	/**
 	 * Opens the stream in to receive information from the socket
 	 */
 	public void open() {
@@ -32,7 +35,7 @@ public class ClientThread extends Thread {
 		}
 	}
 
-	/*
+	/**
 	 * Closes the stream
 	 */
 	public void close() {
@@ -44,8 +47,10 @@ public class ClientThread extends Thread {
 		}
 	}
 
-	/*
+	/**
+	 * Runs in the current thread.
 	 * (non-Javadoc)
+	 *
 	 * @see java.lang.Thread#run()
 	 */
 	public void run() {
