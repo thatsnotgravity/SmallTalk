@@ -1,20 +1,20 @@
-package server;
+package Server;
 
 import java.io.DataInputStream;
 import java.net.Socket;
 
-import client.SmalltalkClient;
+import Client.SmallTalkClient;
 
 
 public class ClientThread extends Thread{
 	private Socket socket = null;
-	private SmalltalkClient client = null;
+	private SmallTalkClient client = null;
 	private DataInputStream streamIn = null;
 	
 	/*
 	 * Constructor for ClientThread
 	 */
-	public ClientThread(SmalltalkClient client, Socket socket){
+	public ClientThread(SmallTalkClient client, Socket socket){
 		this.client = client;
 		this.socket = socket;
 		open();
