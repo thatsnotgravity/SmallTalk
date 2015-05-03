@@ -1,10 +1,10 @@
-package common;
+package Common;
 
-import server.Account;
+import Server.Account;
 
-public class MessageSender {
+public class messageSender {
 	
-	public MessageSender(Account[] accounts) {
+	public messageSender(Account[] accounts) {
 		
 	}
 

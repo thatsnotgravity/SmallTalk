@@ -1,14 +1,12 @@
-package client;
+package Client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import server.ClientThread;
 
-
- public class SmalltalkClient implements Runnable{
+ public class SmallTalkClient implements Runnable{
 	
 	static int clientPort;
 	static int serverPort = 4242; //Random port number
@@ -17,7 +15,7 @@ import server.ClientThread;
 	private Thread thread = null;
 	private DataInputStream  console = null;
 	private DataOutputStream streamOut = null;
-	private ClientThread client = null;
+	private Server.ClientThread client = null;
 	
 	
 	public static void main(String[] args) {
@@ -29,7 +27,7 @@ import server.ClientThread;
 		 * 	- Logging in
 		 * 	- Creating new account
 		 */
-		SmalltalkClient client = new SmalltalkClient();
+		SmallTalkClient client = new SmallTalkClient();
 		
 	}
 	
@@ -41,7 +39,7 @@ import server.ClientThread;
 	 * Constructor for starting server
 	 * Opens the socket at hostName and starts the server
 	 */
-	public SmalltalkClient(){
+	public SmallTalkClient(){
 		System.out.println("Establishing connection...");
 		try{
 			socket = new Socket(hostName, serverPort);
@@ -60,7 +58,7 @@ import server.ClientThread;
 		console = new DataInputStream(System.in);
 		streamOut = new DataOutputStream(socket.getOutputStream());
 		if (thread == null){
-			client = new ClientThread(this, socket);
+			client = new Server.ClientThread(this, socket);
 			thread = new Thread(this);                   
 			thread.start();
 		}
@@ -69,6 +67,7 @@ import server.ClientThread;
 	/*
 	 * Method that stops the thread and server 
 	 */
+	@SuppressWarnings("deprecation")
 	public void stop() throws IOException{  
 		if(thread != null){
 			thread.stop();  
@@ -91,6 +90,7 @@ import server.ClientThread;
 	 * (non-Javadoc)
 	 * @see java.lang.Runnable#run()
 	 */
+	@SuppressWarnings("deprecation")
 	public void run() {
 		while(thread != null){
 			try{

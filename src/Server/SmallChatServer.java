@@ -1,4 +1,4 @@
-package server;
+package Server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,7 +7,7 @@ public class SmallChatServer implements Runnable{
 
 	private ServerSocket server = null;
 	private Thread thread = null;
-	private SmalltalkServer client = null;
+	private SmallTalkServer client = null;
 	
 	/*
 	 * Constructor for SmallChatServer
@@ -37,6 +37,7 @@ public class SmallChatServer implements Runnable{
 	/*
 	 * Method that stops the thread
 	 */
+	@SuppressWarnings("deprecation")
 	public void stop(){  
 		if (thread != null){
 		   thread.stop(); 
@@ -65,7 +66,7 @@ public class SmallChatServer implements Runnable{
 	 */
 	public void addThread(Socket socket){
 		System.out.println("Accepting client...");
-		client = new SmalltalkServer(this, socket);
+		client = new SmallTalkServer(this, socket);
 		try{
 			client.open();
 			client.start();

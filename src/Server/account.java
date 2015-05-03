@@ -15,7 +15,7 @@
  * For existing account information see accounts file.
  */
 
-package server;
+package Server;
 
 import java.io.BufferedWriter;
 import java.io.File;
